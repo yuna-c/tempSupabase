@@ -4,9 +4,8 @@ import App from './App.jsx'
 import './index.css'
 
 // yarn add @supabase/supabase-js
-
-// yarn add styled-components
 // yarn add react-router-dom
+// yarn add uuid
 
 // yarn add redux react-redux
 // yarn add react-redux @reduxjs/toolkit
