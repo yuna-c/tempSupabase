@@ -29,6 +29,27 @@ const AddPost = () => {
     } finally {
     }
   }
+
+  // storage 저장소에 추가
+  const uploadImage = async (e) => {
+    try {
+      // 이미지 업로드 에러
+      if (!e.target.files || e.target.files.length === 0) {
+        throw new Error('You must select an image to upload')
+      }
+
+      const file = e.target.files[0] // 사용자가 추가할 파일 인코딩
+      const fileExt = file.name.split('.').pop() // 파일 대상 이름 분할
+      const fileName = `${Math.random()}.${fileExt}` // 파일 경로에 추가
+
+      let { data, error: uploadError } = await supabase.storage.from('blogimage').upload(filePath, file)
+
+      if (uploadError) throw uploadError
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
   return (
     <>
       <Nav />
@@ -84,7 +105,7 @@ const AddPost = () => {
                 <div>
                   <div className="mb-3 pb-1">
                     <label className="form-label px-0">Post image</label>
-                    <input type="file" className="form-control" />
+                    <input accept="image/*" onChange={uploadImage} type="file" className="form-control" />
                   </div>
                 </div>
                 <button
