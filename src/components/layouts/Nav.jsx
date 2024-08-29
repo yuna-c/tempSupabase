@@ -39,23 +39,30 @@ const Nav = () => {
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/">
-                  About
+              {user ? (
+                <li className="nav-item">
+                  <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/addpost">
+                    Wirte
+                  </NavLink>
+                </li>
+              ) : (
+                ''
+              )}
+              {/* <li className="nav-item">
+                <Link to={`/singlepost/${blog.id}`} className="nav-link px-lg-3 py-3 py-lg-4">
+                  Single Post
+                </Link>
+                <NavLink to={`/singlepost/${blog.id}`} className="nav-link px-lg-3 py-3 py-lg-4">
+                  Single Post
                 </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/">
-                  Sample Post
-                </NavLink>
-              </li>
+              </li> 
               <li className="nav-item">
                 <Link />
                 <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/">
                   Contact
                 </NavLink>
               </li>
-
+              */}
               {user ? (
                 <li className="nav-item">
                   <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/" onClick={handleSignout}>

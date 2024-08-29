@@ -3,6 +3,7 @@ import { supabase } from '../../supabaseClient'
 
 import Footer from '../layouts/Footer'
 import Nav from '../layouts/Nav'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const [data, setData] = useState()
@@ -50,10 +51,10 @@ const Home = () => {
                     <div key={blog.id}>
                       {/* <!-- Post preview--> */}
                       <div className="post-preview">
-                        <a href="post.html">
+                        <Link to={`/singlepost/${blog.id}`}>
                           <h2 className="post-title">{blog.title}</h2>
                           <h3 className="post-subtitle">{blog.description}</h3>
-                        </a>
+                        </Link>
                         {/* <p className="post-meta">
                           Posted by
                           <a href="#!">Start Bootstrap</a>

@@ -19,7 +19,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<SignUp />} />
             <Route exact path="/addpost" element={<AddPost />} />
-            <Route exact path="/singlepost" element={<SinglePost />} />
+            <Route exact path="/singlepost/:id" element={<SinglePost />} />
           </Routes>
         </Router>
       </AuthProvider>

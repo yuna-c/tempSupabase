@@ -52,6 +52,7 @@ const AddPost = () => {
 
       if (uploadError) throw uploadError
 
+      console.log('Image uploaded:', data) // 업로드된 데이터 로그
       getUrl(filePath)
     } catch (error) {
       alert(error.message)
@@ -63,6 +64,7 @@ const AddPost = () => {
     try {
       const { publicURL, error } = await supabase.storage.from('blogimage').getPublicUrl(url)
       if (error) throw error
+      console.log(publicURL)
       setImage(publicURL)
     } catch (error) {
       alert(error.message)
@@ -89,7 +91,7 @@ const AddPost = () => {
         <div className="container px-4 px-lg-5">
           <div className="row gx-4 gx-lg-5 justify-content-center">
             <div className="col-md-10 col-lg-8 col-xl-7">
-              <form>
+              <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                   <div className="mb-3 pb-1">
                     <label className="form-label px-0">Post title</label>
