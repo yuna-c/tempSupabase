@@ -9,17 +9,20 @@ const AddPost = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [content, setContent] = useState('')
-  // const [image, setImage] = useState()
+  const [image, setImage] = useState(null)
+  const [uploading, setUploading] = useState(false)
+
   let navigate = useNavigate()
 
-  // supabase 초기화
-  const addBlog = async ({ title, description, content }) => {
+  // 블로그 글 올리기
+  const addBlog = async ({ title, description, content, image }) => {
     try {
       const updates = {
         id: uuidv4(),
         title: title,
         description: description,
-        content: content
+        content: content,
+        image: image
       }
 
       let { error } = await supabase.from('blog').insert(updates).then(navigate('/'))
@@ -30,23 +33,40 @@ const AddPost = () => {
     }
   }
 
-  // storage 저장소에 추가
+  // storage 저장소에 추가 /이미지 초기 업로드 세팅
   const uploadImage = async (e) => {
     try {
+      setUploading(true)
       // 이미지 업로드 에러
       if (!e.target.files || e.target.files.length === 0) {
         throw new Error('You must select an image to upload')
       }
 
       const file = e.target.files[0] // 사용자가 추가할 파일 인코딩
-      const fileExt = file.name.split('.').pop() // 파일 대상 이름 분할
-      const fileName = `${Math.random()}.${fileExt}` // 파일 경로에 추가
+      const fileExt = file.name.split('.').pop() // 파일 확장자 추출
+      const fileName = `${Math.random()}.${fileExt}` // 랜덤 파일명 생성
+      const filePath = `public/${fileName}` // 파일 경로 생성
 
       let { data, error: uploadError } = await supabase.storage.from('blogimage').upload(filePath, file)
 
       if (uploadError) throw uploadError
+
+      getUrl(filePath)
     } catch (error) {
       alert(error.message)
+    }
+  }
+
+  // 이미지 업로드 프로세스
+  const getUrl = async (url) => {
+    try {
+      const { publicURL, error } = await supabase.storage.from('blogimage').getPublicUrl(url)
+      if (error) throw error
+      setImage(publicURL)
+    } catch (error) {
+      alert(error.message)
+    } finally {
+      setUploading(false)
     }
   }
 
@@ -109,11 +129,12 @@ const AddPost = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() => addBlog({ title, description, content })}
+                  onClick={() => addBlog({ title, description, content, image })}
+                  disabled={uploading}
                   className="btn btn-lg btn-secondary btn-block"
                   type="submit"
                 >
-                  Add
+                  {uploading ? 'uploading...' : 'Add'}
                 </button>
               </form>
             </div>
