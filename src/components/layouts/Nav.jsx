@@ -10,7 +10,7 @@ const Nav = () => {
     navigate('/')
   }
 
-  console.log('Current User:', user) // 사용자 상태 확인용 로그
+  // console.log('Current User:', user) // 사용자 상태 확인용 로그
 
   return (
     <>

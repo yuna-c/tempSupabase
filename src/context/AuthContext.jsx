@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
       if (error) {
         console.error('Error getting session:', error)
       } else {
-        console.log('Session:', session)
+        // console.log('Session:', session)
         setUser(session?.user ?? null)
       }
 
@@ -48,7 +48,7 @@ export function AuthProvider({ children }) {
     getUserSession()
 
     const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('Auth state changed:', event, session)
+      // console.log('Auth state changed:', event, session)
       setUser(session?.user ?? null)
       setLoading(false)
     })

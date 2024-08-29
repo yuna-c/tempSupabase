@@ -1,9 +1,10 @@
-import Nav from '../../layouts/Nav'
-import Footer from '../../layouts/Footer'
 import { useState } from 'react'
 import { supabase } from '../../../supabaseClient'
 import { v4 as uuidv4 } from 'uuid'
 import { useNavigate } from 'react-router-dom'
+
+import Nav from '../../layouts/Nav'
+import Footer from '../../layouts/Footer'
 
 const AddPost = () => {
   const [title, setTitle] = useState('')
