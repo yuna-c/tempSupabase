@@ -5,7 +5,7 @@ import Footer from '../layouts/Footer'
 import Nav from '../layouts/Nav'
 import { Link } from 'react-router-dom'
 
-const Home = () => {
+const MyPost = () => {
   const [data, setData] = useState()
   useEffect(() => {
     const getBlogs = async () => {
@@ -83,4 +83,4 @@ const Home = () => {
     </>
   )
 }
-export default Home
+export default MyPost

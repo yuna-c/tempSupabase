@@ -1,10 +1,10 @@
 import { useAuth } from '../../context/AuthContext'
-
 import { useNavigate, NavLink, Link } from 'react-router-dom'
 
 const Nav = () => {
   const { user, signOut } = useAuth()
   let navigate = useNavigate()
+
   const handleSignout = async () => {
     await signOut()
     navigate('/')
@@ -39,15 +39,7 @@ const Nav = () => {
                   Home
                 </NavLink>
               </li>
-              {user ? (
-                <li className="nav-item">
-                  <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/addpost">
-                    Wirte
-                  </NavLink>
-                </li>
-              ) : (
-                ''
-              )}
+
               {/* <li className="nav-item">
                 <Link to={`/singlepost/${blog.id}`} className="nav-link px-lg-3 py-3 py-lg-4">
                   Single Post
@@ -63,12 +55,20 @@ const Nav = () => {
                 </NavLink>
               </li>
               */}
+
               {user ? (
-                <li className="nav-item">
-                  <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/" onClick={handleSignout}>
-                    Sign out
-                  </NavLink>
-                </li>
+                <>
+                  <li className="nav-item">
+                    <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/addpost">
+                      Write
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/" onClick={handleSignout}>
+                      Sign out
+                    </NavLink>
+                  </li>
+                </>
               ) : (
                 <li className="nav-item">
                   <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/login">

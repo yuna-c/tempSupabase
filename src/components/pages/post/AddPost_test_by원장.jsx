@@ -15,6 +15,29 @@ const AddPost = () => {
 
   let navigate = useNavigate()
 
+  // 블로그 글 올리기
+  const addBlog = async ({ title, description, content, image }) => {
+    try {
+      // let { data, error: uploadError } = await supabase.storage.from('blogimage').upload(filePath, file) // 튜터님 추천 잘됨?
+      getUrl()
+      const updates = {
+        id: uuidv4(),
+        title: title,
+        description: description,
+        content: content,
+        image: image
+        // 이미지 경로도 들어가야 한다! (************)
+        //튜터님 추천 addBlog 할 때
+      }
+
+      let { error } = await supabase.from('blog').insert(updates).then(navigate('/')) //
+      if (error) throw error // 오류발생한 경우 사용자에게 던짐
+    } catch (error) {
+      alert(error.message)
+    } finally {
+    }
+  }
+
   // storage 저장소에 추가 /이미지 초기 업로드 세팅
   const uploadImage = async (e) => {
     try {
@@ -28,17 +51,18 @@ const AddPost = () => {
       const fileExt = file.name.split('.').pop() // 파일 확장자 추출
       const fileName = `${Math.random()}.${fileExt}` // 랜덤 파일명 생성
       const filePath = `public/${fileName}` // 파일 경로 생성
-
-      let { data, error: uploadError } = await supabase.storage.from('blogimage').upload(filePath, file)
+      console.log(file)
+      let { data, error: uploadError } = await supabase.storage.from('blogimage').upload(filePath, file) // 잘됨
 
       if (uploadError) throw uploadError
 
-      console.log('Image uploaded:', data) // 업로드된 데이터 로그
+      console.log('Image uploaded:', data) // 업로드된 데이터 로그(여기에 담김 파일패스) => 포스팅에 업데이트(인서트 할때 / )
       getUrl(filePath)
     } catch (error) {
       alert(error.message)
     }
   }
+  // 올리고 나서 주소를 전달을 받음 (data) 안에 url 이 들어가야 함
 
   // 이미지 업로드 프로세스
   const getUrl = async (url) => {
@@ -54,24 +78,6 @@ const AddPost = () => {
     }
   }
 
-  // 블로그 글 올리기
-  const addBlog = async ({ title, description, content, image }) => {
-    try {
-      const updates = {
-        id: uuidv4(),
-        title: title,
-        description: description,
-        content: content,
-        image: image
-      }
-
-      let { error } = await supabase.from('blog').insert(updates).then(navigate('/'))
-      if (error) throw error // 오류발생한 경우 사용자에게 던짐
-    } catch (error) {
-      alert(error.message)
-    } finally {
-    }
-  }
   return (
     <>
       <Nav />

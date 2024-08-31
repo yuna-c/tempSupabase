@@ -21,7 +21,8 @@ const SinglePost = () => {
           console.log('error', error)
           throw error
         }
-        console.log(data)
+        console.log(`data=> `, typeof data) // 데이터
+        console.log(`Image=> `, typeof data[0]?.image) // 첫 번째 데이터의 이미지 URL
         setData(data[0])
       } catch (error) {
         console.log(error.message)

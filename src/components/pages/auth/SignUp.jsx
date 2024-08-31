@@ -27,8 +27,12 @@ const SignUp = () => {
       return
     }
 
-    navigate('/')
-    window.location.reload()
+    // navigate('/')
+    // window.location.reload()
+
+    // 회원가입 성공 후 로그인 페이지로 이동
+    setMessage('Signup successful! Please log in.')
+    navigate('/login')
   }
 
   return (
@@ -63,10 +67,10 @@ const SignUp = () => {
           </label>
         </div>
         <button className="btn btn-lg btn-primary btn-block" type="submit">
-          Sign up
+          회원가입
         </button>
         <Link className="btn btn-lg btn-success btn-block" to="/login">
-          Sign in
+          로그인
         </Link>
       </form>
       {message ? alert(message)(<p>{message}</p>) : ''}

@@ -59,10 +59,20 @@ export function AuthProvider({ children }) {
   }, [])
 
   const value = {
-    signUp: (data) => supabase.auth.signUp(data),
+    // 회원가입 후 자동 로그인 방지
+    signUp: async (data) => {
+      const { user, error } = await supabase.auth.signUp(data)
+
+      if (error) {
+        console.error('Signup error:', error)
+        return { error }
+      }
+
+      // 여기서 로그인을 따로 진행하지 않고, 필요한 경우 사용자가 직접 로그인을 시도
+      return { user }
+    },
     signIn: (data) => supabase.auth.signInWithPassword(data),
     signOut: () => supabase.auth.signOut(),
-
     user
   }
 

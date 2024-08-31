@@ -63,10 +63,10 @@ const Login = () => {
           </label>
         </div>
         <button className="btn btn-lg btn-primary btn-block" type="submit">
-          Sign in
+          로그인
         </button>
         <Link className="btn btn-lg btn-success btn-block" to="/signup">
-          Sign up
+          회원가입
         </Link>
       </form>
       {message ? alert(message) : ''}
