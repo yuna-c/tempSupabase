@@ -38,7 +38,8 @@ export function AuthProvider({ children }) {
       if (error) {
         console.error('Error getting session:', error)
       } else {
-        // console.log('Session:', session)
+        console.log('Session:', session.user.email)
+        console.log('Session:', session.user.id)
         setUser(session?.user ?? null)
       }
 

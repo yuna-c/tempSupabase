@@ -39,7 +39,11 @@ const Nav = () => {
                   Home
                 </NavLink>
               </li>
-
+              <li className="nav-item">
+                <Link className="nav-link px-lg-3 py-3 py-lg-4" to="/all">
+                  all
+                </Link>
+              </li>
               {/* <li className="nav-item">
                 <Link to={`/singlepost/${blog.id}`} className="nav-link px-lg-3 py-3 py-lg-4">
                   Single Post
@@ -61,6 +65,11 @@ const Nav = () => {
                   <li className="nav-item">
                     <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/addpost">
                       Write
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link px-lg-3 py-3 py-lg-4" to="/upload">
+                      upload
                     </NavLink>
                   </li>
                   <li className="nav-item">

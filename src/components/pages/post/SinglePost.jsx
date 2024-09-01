@@ -21,8 +21,11 @@ const SinglePost = () => {
           console.log('error', error)
           throw error
         }
+        console.log(`data=> `, data) // 데이터
+
         console.log(`data=> `, typeof data) // 데이터
         console.log(`Image=> `, typeof data[0]?.image) // 첫 번째 데이터의 이미지 URL
+        console.log(data.image)
         setData(data[0])
       } catch (error) {
         console.log(error.message)
@@ -47,8 +50,11 @@ const SinglePost = () => {
                   <br />
                   <img
                     style={{ maxWidth: '500px', width: '-webkit-fill-available' }}
+                    // src={`https://wqwibyktkcnkeleewbme.supabase.co/storage/v1/object/public/blogimage/${
+                    //   data ? data.image : ''
+                    // }`}
                     src={data ? data.image : ''}
-                    alt=""
+                    alt="Post Image"
                   />
                   {/* {data && data.image ? <img src={data.image} alt="" /> : 'Loading...'} */}
                   <br />
